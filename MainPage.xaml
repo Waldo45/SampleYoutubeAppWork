@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    x:Class="Week9PrismExampleApp.Views.MainPage"
+    Title="MainPage"
+    Padding="0,20,0,0">
+      
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="White">
+            <StackLayout BackgroundColor="Gray"
+                     Orientation="Horizontal"
+                     HeightRequest="40"
+                     Spacing="0">
+
+                <Entry
+                    x:Name="mahBax"
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="Search Here"
+                    PlaceholderColor="DarkGray"
+                    BackgroundColor="White"
+            
+            />
+
+                <Button Text="🔍"
+                    BackgroundColor="WhiteSmoke"
+                    
+                    WidthRequest="50"
+                    HeightRequest="50"
+                    BorderColor="White"
+                    Command="{Binding GetYoutubeInfoCommand}"
+                    CommandParameter="{x:Reference mahBax}"
+
+                />
+
+                </StackLayout>
+                <Label Text="Videos"
+                IsVisible="{Binding IsVisible}"
+                BackgroundColor="White"
+                TextColor="Black"/>
+                <ListView x:Name="videoListView"
+                IsVisible="{Binding IsVisible}"
+                    ItemsSource="{Binding VideoSearchResults}"
+                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+
+                BackgroundColor="White"
+                      SeparatorColor="LightGray"
+                >
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+
+                            <ImageCell ImageSource="{Binding DefaultThumbnailURL}"
+                                       Text="{Binding VideoTitle}"
+                                       Detail="{Binding VideoDescription}"
+                                       TextColor="Black"
+                                       DetailColor="Green"
+                                       Command="{Binding TappedCommand}"
+                                       CommandParameter="{Binding .}"
+
+                            />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                 <Label Text="Channels"
+                IsVisible="{Binding IsVisible}"
+                BackgroundColor="White"
+                TextColor="Black"/>
+                <ListView x:Name="channelListView" 
+                IsVisible="{Binding IsVisible}"
+                          ItemsSource="{Binding ChannelSearchResults}" 
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                          BackgroundColor="White"
+                          SeparatorColor="LightGray"
+                >
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+
+                            <ImageCell ImageSource="{Binding DefaultThumbnailURL}"
+                                       Text="{Binding ChannelTitle}"
+                                       Detail="{Binding ChannelDescription}"
+                                       TextColor="Black"
+                                       DetailColor="Green"
+                                       Command="{Binding TappedCommand}"
+                                       CommandParameter="{Binding .}"
+
+                            />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                    <Label Text="Playlists"
+                IsVisible="{Binding IsVisible}"
+                    BackgroundColor="White"
+                    TextColor="Black"/>
+                <ListView x:Name="playListView"
+                IsVisible="{Binding IsVisible}"
+                          ItemsSource="{Binding PlaylistSearchResults}"
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                    
+
+                BackgroundColor="White"
+                      SeparatorColor="LightGray"
+                >
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+
+                            <ImageCell ImageSource="{Binding DefaultThumbnailURL}"
+                            Text="{Binding PlaylistTitle}"
+                                       Detail="{Binding PlaylistDescription}"
+                                       TextColor="Black"
+                                       DetailColor="Green"
+                                       Command="{Binding TappedCommand}"
+                                       CommandParameter="{Binding .}"
+
+                            />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            
+
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>
